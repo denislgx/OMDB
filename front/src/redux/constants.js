@@ -1,0 +1,9 @@
+export const SEARCH_MOVIES = "SEARCH_MOVIES";
+export const SEARCH_SINGLE_MOVIE = "SEARCH_SINGLE_MOVIE";
+export const REGISTER = "REGISTER";
+export const LOG_IN = "LOG_IN";
+export const LOG_OUT = "LOG_OUT";
+export const ADD_FAV = "ADD_FAV";
+export const FETCH_FAVS = "FETCH_FAVS";
+export const REMOVE_FAV = "REMOVE_FAV";
+export const PERSIST_SESSION = "PERSIST_SESSION";
