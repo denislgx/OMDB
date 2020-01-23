@@ -35,15 +35,9 @@ export const removeFav = remFav => {
   };
 };
 
-// export const removeFavCr = movie => dispatch => {
-//   axios
-//     .delete("/api/removeFav", { data: movie })
-//     .then(movie => dispatch(removeFav(movie.data)));
-// };
-
 export const removeFavCr = filmId => dispatch => {
-  console.log("FILM IDDDDDDD", filmId);
   return axios
     .get(`/api/delete/${filmId}`)
-    .then(res => dispatch(remFav1(res.data)));
+    .then(res => dispatch(removeFav(res.data)))
+    .then(whateva => window.location.reload());
 };

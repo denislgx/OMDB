@@ -10,13 +10,15 @@ export default ({ singleMovie, isLogged, addFavCr, history }) => {
       >
         OMDB HOME
       </button>
-      <button
-        type="button"
-        onClick={() => history.push("/favorites")}
-        className="btn btn-secondary btn-sm"
-      >
-        VER FAVORITOS
-      </button>
+      {isLogged ? (
+        <button
+          type="button"
+          onClick={() => history.push("/favorites")}
+          className="btn btn-secondary btn-sm"
+        >
+          VER FAVORITOS
+        </button>
+      ) : null}
       <button
         type="button"
         onClick={() => history.goBack()}
