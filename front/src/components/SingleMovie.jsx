@@ -1,9 +1,29 @@
 import React from "react";
 
-export default ({ singleMovie, isLogged, addFavCr }) => {
-  console.log("SINGLEMOVIE", isLogged);
+export default ({ singleMovie, isLogged, addFavCr, history }) => {
   return (
     <div>
+      <button
+        type="button"
+        onClick={() => history.push("/")}
+        className="btn btn-secondary btn-sm"
+      >
+        OMDB HOME
+      </button>
+      <button
+        type="button"
+        onClick={() => history.push("/favorites")}
+        className="btn btn-secondary btn-sm"
+      >
+        VER FAVORITOS
+      </button>
+      <button
+        type="button"
+        onClick={() => history.goBack()}
+        className="btn btn-secondary btn-sm"
+      >
+        VOLVER
+      </button>
       <h1>{singleMovie.Title}</h1>
       <img src={singleMovie.Poster} alt="" />
       <h6>Genre: {singleMovie.Genre}</h6>

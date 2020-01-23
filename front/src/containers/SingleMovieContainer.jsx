@@ -20,6 +20,7 @@ class SingleMovieContainer extends React.Component {
           singleMovie={this.props.singleMovie}
           isLogged={this.props.isLogged}
           addFavCr={this.props.addFavCr}
+          history={this.props.match.history}
         />
       </div>
     );

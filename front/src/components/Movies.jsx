@@ -1,9 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default ({ moviesFound }) => {
+export default ({ moviesFound, history, user }) => {
   return (
     <div>
+      <button
+        type="button"
+        onClick={() => history.push("/")}
+        className="btn btn-secondary btn-sm"
+      >
+        OMDB HOME
+      </button>
+
+      {user ? (
+        <button
+          type="button"
+          onClick={() => history.push("/favorites")}
+          className="btn btn-secondary btn-sm"
+        >
+          VER FAVORITOS
+        </button>
+      ) : null}
+      <button
+        type="button"
+        onClick={() => history.goBack()}
+        className="btn btn-secondary btn-sm"
+      >
+        VOLVER
+      </button>
+
       {moviesFound ? (
         moviesFound.map(movie => (
           <div key={movie.imdbID}>
