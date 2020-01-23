@@ -41224,13 +41224,13 @@ __webpack_require__.r(__webpack_exports__);
       return history.push("/");
     },
     className: "btn btn-secondary btn-sm"
-  }, "OMDB HOME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "OMDB HOME"), isLogged ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return history.push("/favorites");
     },
     className: "btn btn-secondary btn-sm"
-  }, "VER FAVORITOS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "VER FAVORITOS") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return history.goBack();
@@ -41931,17 +41931,13 @@ var removeFav = function removeFav(remFav) {
     type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FAV"],
     favorites: remFav
   };
-}; // export const removeFavCr = movie => dispatch => {
-//   axios
-//     .delete("/api/removeFav", { data: movie })
-//     .then(movie => dispatch(removeFav(movie.data)));
-// };
-
+};
 var removeFavCr = function removeFavCr(filmId) {
   return function (dispatch) {
-    console.log("FILM IDDDDDDD", filmId);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/delete/".concat(filmId)).then(function (res) {
-      return dispatch(remFav1(res.data));
+      return dispatch(removeFav(res.data));
+    }).then(function (whateva) {
+      return window.location.reload();
     });
   };
 };

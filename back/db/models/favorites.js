@@ -7,6 +7,9 @@ Favorites.init(
   {
     film: {
       type: Sequelize.JSON
+    },
+    imdbID: {
+      type: Sequelize.STRING
     }
   },
   { sequelize: db, modelName: "favorites" }

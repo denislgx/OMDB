@@ -19,7 +19,8 @@ router.get("/logout", (req, res) => {
 });
 
 router.post("/addFav", (req, res) => {
-  Favorites.create({ film: req.body }).then(newFav => {
+  console.log("SOY EL REQ BODY: ", req.body.imdbID);
+  Favorites.create({ film: req.body, imdbID: req.body.imdbID }).then(newFav => {
     newFav.setUser(req.user.id);
     res.send(newFav);
   });
@@ -52,11 +53,15 @@ router.get("/delete/:id", (req, res) => {
   if (req.params.id) {
     Favorites.destroy({
       where: {
-        userId: req.user.id
-        // film: adentro de este objeto tiene que estar
+        userId: req.user.id,
+        imdbID: req.params.id
       }
     }).then(peliBorrada => {
-      Favorites.findAll().then(allFavs => {
+      Favorites.findAll({
+        where: {
+          userId: req.user.id
+        }
+      }).then(allFavs => {
         console.log("akjsbfjhnmebajfnmbc", allFavs);
         res.json(allFavs);
       });
