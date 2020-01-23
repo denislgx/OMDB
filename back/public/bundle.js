@@ -40866,8 +40866,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var favorites = _ref.favorites,
-      removeFavCr = _ref.removeFavCr;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, favorites.map(function (movie) {
+      removeFavCr = _ref.removeFavCr,
+      history = _ref.history;
+  console.log("BORRAME ESTAAAAAAAAA: ", favorites);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.push("/");
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "OMDB HOME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.goBack();
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "VOLVER"), favorites.map(function (movie) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: movie.film.imdbID
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Title: ", movie.film.Title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -40879,7 +40893,7 @@ __webpack_require__.r(__webpack_exports__);
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, rating.Source), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, rating.Value));
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Released: ", movie.film.Released), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Writer: ", movie.film.Writer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Runtime: ", movie.film.Runtime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: function onClick() {
-        return removeFavCr(movie.film);
+        return removeFavCr(movie.film.imdbID);
       }
     }, "Borrar Favorito"));
   }));
@@ -41005,6 +41019,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_FavoritesContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/FavoritesContainer */ "./src/containers/FavoritesContainer.jsx");
 /* harmony import */ var _redux_actions_logUser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/actions/logUser */ "./src/redux/actions/logUser.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_favorites__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../redux/actions/favorites */ "./src/redux/actions/favorites.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41022,6 +41037,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -41092,7 +41108,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     persistSession: function persistSession(input) {
       return dispatch(Object(_redux_actions_logUser__WEBPACK_IMPORTED_MODULE_8__["persistSession"])(input));
-    }
+    },
+    fetchFavCr: function fetchFavCr() {
+      return dispatch(_redux_actions_favorites__WEBPACK_IMPORTED_MODULE_10__["fetchFavCr"]);
+    } // LOGUEADO QUE FETCHEE FAVS
+
   };
 };
 
@@ -41115,8 +41135,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var moviesFound = _ref.moviesFound;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, moviesFound ? moviesFound.map(function (movie) {
+  var moviesFound = _ref.moviesFound,
+      history = _ref.history,
+      user = _ref.user;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.push("/");
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "OMDB HOME"), user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.push("/favorites");
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "VER FAVORITOS") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.goBack();
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "VOLVER"), moviesFound ? moviesFound.map(function (movie) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: movie.imdbID
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -41176,9 +41216,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var singleMovie = _ref.singleMovie,
       isLogged = _ref.isLogged,
-      addFavCr = _ref.addFavCr;
-  console.log("SINGLEMOVIE", isLogged);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, singleMovie.Title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      addFavCr = _ref.addFavCr,
+      history = _ref.history;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.push("/");
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "OMDB HOME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.push("/favorites");
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "VER FAVORITOS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return history.goBack();
+    },
+    className: "btn btn-secondary btn-sm"
+  }, "VOLVER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, singleMovie.Title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: singleMovie.Poster,
     alt: ""
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Genre: ", singleMovie.Genre), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Year: ", singleMovie.Year), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Director: ", singleMovie.Director), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Actors: ", singleMovie.Actors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Plot: ", singleMovie.Plot), isLogged ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -41239,11 +41297,17 @@ function (_React$Component) {
   }
 
   _createClass(FavoritesContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchFavCr();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Favorites__WEBPACK_IMPORTED_MODULE_2__["default"], {
         favorites: this.props.favorites,
-        removeFavCr: this.props.removeFavCr
+        removeFavCr: this.props.removeFavCr,
+        history: this.props.history
       });
     }
   }]);
@@ -41261,6 +41325,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeFavCr: function removeFavCr(input) {
       return dispatch(Object(_redux_actions_favorites__WEBPACK_IMPORTED_MODULE_3__["removeFavCr"])(input));
+    },
+    fetchFavCr: function fetchFavCr() {
+      return dispatch(Object(_redux_actions_favorites__WEBPACK_IMPORTED_MODULE_3__["fetchFavCr"])());
     }
   };
 };
@@ -41504,6 +41571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_Movies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Movies */ "./src/components/Movies.jsx");
+/* harmony import */ var _redux_actions_searchMovies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/actions/searchMovies */ "./src/redux/actions/searchMovies.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41526,6 +41594,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var MoviesContainer =
 /*#__PURE__*/
 function (_React$Component) {
@@ -41538,11 +41607,20 @@ function (_React$Component) {
   }
 
   _createClass(MoviesContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchMovies(this.props.match.match.params.movie);
+    }
+  }, {
     key: "render",
     value: function render() {
+      // console.log("EL OBJ MATCH: ", this.props.match.match.params.movie);
+      console.log("!!!!!!!!!!@@@@@", this.props.user);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Movies__WEBPACK_IMPORTED_MODULE_2__["default"], {
         moviesFound: this.props.moviesFound,
-        isLogged: this.props.isLogged
+        isLogged: this.props.isLogged,
+        history: this.props.match.history,
+        user: this.props.user
       }));
     }
   }]);
@@ -41552,11 +41630,20 @@ function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    moviesFound: state.moviesReducer.moviesFound.Search
+    moviesFound: state.moviesReducer.moviesFound.Search,
+    user: state.logUserReducer.isLogged
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(MoviesContainer));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchMovies: function fetchMovies(input) {
+      return dispatch(Object(_redux_actions_searchMovies__WEBPACK_IMPORTED_MODULE_3__["fetchMovies"])(input));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(MoviesContainer));
 
 /***/ }),
 
@@ -41637,7 +41724,7 @@ function (_React$Component) {
     value: function handleSubmit(event) {
       event.preventDefault();
       this.props.doRegister(this.state);
-      this.props.history.push("/");
+      this.props.history.push("/login");
     }
   }, {
     key: "render",
@@ -41726,7 +41813,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SingleMovie__WEBPACK_IMPORTED_MODULE_2__["default"], {
         singleMovie: this.props.singleMovie,
         isLogged: this.props.isLogged,
-        addFavCr: this.props.addFavCr
+        addFavCr: this.props.addFavCr,
+        history: this.props.match.history
       }));
     }
   }]);
@@ -41843,13 +41931,17 @@ var removeFav = function removeFav(remFav) {
     type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FAV"],
     favorites: remFav
   };
-};
-var removeFavCr = function removeFavCr(movie) {
+}; // export const removeFavCr = movie => dispatch => {
+//   axios
+//     .delete("/api/removeFav", { data: movie })
+//     .then(movie => dispatch(removeFav(movie.data)));
+// };
+
+var removeFavCr = function removeFavCr(filmId) {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/removeFav", {
-      data: movie
-    }).then(function (movie) {
-      return dispatch(removeFav(movie.data));
+    console.log("FILM IDDDDDDD", filmId);
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/delete/".concat(filmId)).then(function (res) {
+      return dispatch(remFav1(res.data));
     });
   };
 };

@@ -37,14 +37,31 @@ router.get("/me", (req, res) => {
   res.send(req.user);
 });
 
-router.delete("/removeFav", (req, res) => {
-  // console.log("REMOVEFAVVVVVV", req.body); llega...
-  Favorites.destroy({
-    where: {
-      film: req.body,
-      userId: req.user.id
-    }
-  }).then(rem => res.send(rem));
+// router.delete("/removeFav", (req, res) => {
+//   console.log("REMOVEFAVVVVVV", req.body.imdbID);
+//   Favorites.destroy({
+//     where: {
+//       film: req.body,
+//       userId: req.user.id
+//     }
+//   }).then(rem => res.send(rem));
+// });
+
+router.get("/delete/:id", (req, res) => {
+  console.log("!@#$%ˆ&*()_+_)(*&ˆ%$#!#$%ˆ&*(+_)(*&ˆ%$@", req.params.id);
+  if (req.params.id) {
+    Favorites.destroy({
+      where: {
+        userId: req.user.id
+        // film: adentro de este objeto tiene que estar
+      }
+    }).then(peliBorrada => {
+      Favorites.findAll().then(allFavs => {
+        console.log("akjsbfjhnmebajfnmbc", allFavs);
+        res.json(allFavs);
+      });
+    });
+  }
 });
 
 module.exports = router;

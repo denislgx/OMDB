@@ -23,7 +23,7 @@ class RegisterContainer extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.doRegister(this.state);
-    this.props.history.push("/");
+    this.props.history.push("/login");
   }
   render() {
     return (
@@ -42,7 +42,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RegisterContainer);
+export default connect(null, mapDispatchToProps)(RegisterContainer);

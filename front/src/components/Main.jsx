@@ -9,6 +9,7 @@ import FavoritesContainer from "../containers/FavoritesContainer";
 
 import { persistSession } from "../redux/actions/logUser";
 import { connect } from "react-redux";
+import { fetchFavCr } from "../redux/actions/favorites";
 
 class Main extends React.Component {
   constructor(props) {
@@ -39,11 +40,9 @@ class Main extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    persistSession: input => dispatch(persistSession(input))
+    persistSession: input => dispatch(persistSession(input)),
+    fetchFavCr: () => dispatch(fetchFavCr) // LOGUEADO QUE FETCHEE FAVS
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Main);
+export default connect(null, mapDispatchToProps)(Main);

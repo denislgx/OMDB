@@ -1,9 +1,24 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-export default ({ favorites, removeFavCr }) => {
+export default ({ favorites, removeFavCr, history }) => {
+  console.log("BORRAME ESTAAAAAAAAA: ", favorites);
   return (
     <div>
+      <button
+        type="button"
+        onClick={() => history.push("/")}
+        className="btn btn-secondary btn-sm"
+      >
+        OMDB HOME
+      </button>
+      <button
+        type="button"
+        onClick={() => history.goBack()}
+        className="btn btn-secondary btn-sm"
+      >
+        VOLVER
+      </button>
       {favorites.map(movie => (
         <div key={movie.film.imdbID}>
           <h1>Title: {movie.film.Title}</h1>
@@ -26,7 +41,8 @@ export default ({ favorites, removeFavCr }) => {
           <h6>Released: {movie.film.Released}</h6>
           <h6>Writer: {movie.film.Writer}</h6>
           <h6>Runtime: {movie.film.Runtime}</h6>
-          <button onClick={() => removeFavCr(movie.film)}>
+          {/* {console.log("EL IDDDD: ", movie.film.imdbID)} */}
+          <button onClick={() => removeFavCr(movie.film.imdbID)}>
             Borrar Favorito
           </button>
         </div>
